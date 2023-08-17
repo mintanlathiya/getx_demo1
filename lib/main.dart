@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:getx_demo1/gender_hobby/gender_hobby_ui.dart';
 import 'package:getx_demo1/init_controller.dart';
+import 'package:getx_demo1/tictac/tic_tac_ui.dart';
 
 void main() {
   InitController.getAllController;
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: GenderHobbyUiDemo(),
+      home: TicTacUiDemo(),
     );
   }
 }
