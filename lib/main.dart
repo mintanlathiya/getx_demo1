@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_demo1/counter_ex.dart/counterex_ui.dart';
+import 'package:getx_demo1/gender_hobby/gender_hobby_ui.dart';
 import 'package:getx_demo1/init_controller.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CounterExUiDemo(),
+      home: GenderHobbyUiDemo(),
     );
   }
 }
