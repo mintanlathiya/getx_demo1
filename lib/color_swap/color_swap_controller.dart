@@ -33,6 +33,7 @@ class ColorSwapController extends GetxController {
     }
   }
 
+//////////////////////
   void selectColors(int index) {
     if (flag == true) {
       firstIndex = index.obs;
