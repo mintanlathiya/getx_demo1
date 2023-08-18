@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TicTacController extends GetxController {
+class TicTacControllermy extends GetxController {
   RxBool oTurn = true.obs;
   RxList<String> displayElement = ['', '', '', '', '', '', '', '', ''].obs;
   RxList cardColor = List.generate(9, (index) => Colors.teal).obs;

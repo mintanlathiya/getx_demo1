@@ -1,82 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_demo1/tictac/tic_tac_controller.dart';
+import 'package:getx_demo1/tictac/tic_tic_controller.dart';
 
-class TicTacUiDemo extends StatefulWidget {
-  const TicTacUiDemo({super.key});
+class TicTacUi extends StatelessWidget {
+  const TicTacUi({super.key});
 
-  @override
-  State<TicTacUiDemo> createState() => _TicTacUiDemoState();
-}
-
-class _TicTacUiDemoState extends State<TicTacUiDemo> {
-  TicTacController ticTacController = Get.find();
   @override
   Widget build(BuildContext context) {
+    TicTacController tictacController = Get.find();
     return Scaffold(
-      backgroundColor: Colors.black,
       body: Column(
         children: [
-          Obx(
-            () => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    const Text(
-                      'PLAYER 1',
-                      style: TextStyle(fontSize: 45, color: Colors.white),
-                    ),
-                    Text(
-                      ticTacController.oScore.value.toString(),
-                      style: const TextStyle(fontSize: 45, color: Colors.white),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    const Text(
-                      'PLAYER 2',
-                      style: TextStyle(fontSize: 45, color: Colors.white),
-                    ),
-                    Text(
-                      ticTacController.xScore.value.toString(),
-                      style: const TextStyle(fontSize: 45, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  const Text('Player1(O)'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Obx(() => Text(tictacController.player1.value.toString()))
+                ],
+              ),
+              Column(
+                children: [
+                  const Text('Player2(X)'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Obx(() => Text(tictacController.player2.value.toString()))
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
           ),
           Expanded(
-            child: GridView.builder(
-              itemCount: 9,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, mainAxisSpacing: 5, crossAxisSpacing: 5),
-              itemBuilder: (context, index) => Obx(
-                () => GestureDetector(
-                  onTap: () {
-                    ticTacController.tapped(index, context);
-                  },
-                  child: Card(
-                    color: ticTacController.cardColor[index],
-                    elevation: 2,
-                    shape: Border.all(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                    child: Center(
+            child: Obx(
+              () => GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      tictacController.selectedIndex = index.obs;
+                      tictacController.play();
+                    },
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 2,
+                            spreadRadius: 3,
+                          )
+                        ],
+                      ),
+                      alignment: Alignment.center,
                       child: Text(
-                        ticTacController.displayElement[index],
+                        tictacController.gamePlay[index],
                         style: const TextStyle(
-                            fontSize: 80,
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
+                itemCount: tictacController.gamePlay.length,
               ),
             ),
           ),
@@ -85,40 +82,18 @@ class _TicTacUiDemoState extends State<TicTacUiDemo> {
             children: [
               MaterialButton(
                 onPressed: () {
-                  ticTacController.clearScoreBoard();
+                  tictacController.clear();
                 },
-                shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 70,
-                color: Colors.white,
-                child: const Text(
-                  'Clear Score Board',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.black,
-                  ),
-                ),
+                child: const Text('Reset'),
               ),
               MaterialButton(
                 onPressed: () {
-                  ticTacController.allClear();
+                  tictacController.reserAll();
                 },
-                shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 70,
-                color: Colors.white,
-                child: const Text(
-                  'Restart',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.black,
-                  ),
-                ),
+                child: const Text('Restart'),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

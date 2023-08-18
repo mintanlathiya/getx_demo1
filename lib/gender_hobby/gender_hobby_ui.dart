@@ -1,95 +1,109 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_demo1/gender_hobby/gender_hobby_controller.dart';
 
+// ignore: must_be_immutable
 class GenderHobbyUiDemo extends StatelessWidget {
-  const GenderHobbyUiDemo({super.key});
+  GenderHobbyUiDemo({super.key});
+  UiController uiController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    GenderHobbyController genderHobbyController = Get.find();
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Obx(
-            () => Row(
-              children: [
-                const Text('Gender : '),
-                const Text('Male'),
-                Radio(
-                  value: genderHobbyController.male.value,
-                  groupValue: genderHobbyController.gender.value,
+          Row(
+            children: [
+              const Text('Gender: '),
+              Obx(
+                () => Radio(
+                  value: uiController.male.value,
+                  groupValue: uiController.gender.value,
                   onChanged: (value) {
-                    genderHobbyController.genderMethod(value!);
+                    uiController.changeGender(value.toString());
+                    log(uiController.gender.value);
                   },
                 ),
-                const Text('FeMale'),
-                Radio(
-                  value: genderHobbyController.feMale.value,
-                  groupValue: genderHobbyController.gender.value,
+              ),
+              const Text('Male'),
+              Obx(
+                () => Radio(
+                  value: uiController.female.value,
+                  groupValue: uiController.gender.value,
                   onChanged: (value) {
-                    genderHobbyController.genderMethod(value!);
+                    uiController.changeGender(value.toString());
+                    log(uiController.gender.value);
                   },
                 ),
-              ],
-            ),
+              ),
+              const Text('Female'),
+            ],
           ),
           Row(
             children: [
-              const Text('Hobby : '),
-              const Text('Cricket'),
+              const Text('Hobby: '),
               Obx(
                 () => Checkbox(
-                  value: genderHobbyController.isCricket.value,
+                  value: uiController.checkBoxValue[0],
                   onChanged: (value) {
-                    genderHobbyController.cricketMethod(value!);
+                    uiController.changeHobby(0, value!);
+                    log(uiController.checkBoxValue.string);
+                  },
+                ),
+              ),
+              const Text('Reading'),
+              Obx(
+                () => Checkbox(
+                  value: uiController.checkBoxValue[1],
+                  onChanged: (value) {
+                    uiController.changeHobby(1, value!);
+                    log(uiController.checkBoxValue.string);
                   },
                 ),
               ),
               const Text('Football'),
               Obx(
                 () => Checkbox(
-                  value: genderHobbyController.isFootball.value,
+                  value: uiController.checkBoxValue[2],
                   onChanged: (value) {
-                    genderHobbyController.footballMethod(value!);
+                    uiController.changeHobby(2, value!);
+                    log(uiController.checkBoxValue.string);
                   },
                 ),
               ),
-              const Text('Singing'),
-              Obx(
-                () => Checkbox(
-                  value: genderHobbyController.isSinging.value,
-                  onChanged: (value) {
-                    genderHobbyController.singingMethod(value!);
-                  },
-                ),
-              ),
+              const Text('Music'),
             ],
           ),
-          MaterialButton(
+          const SizedBox(
+            height: 30,
+          ),
+          ElevatedButton(
             onPressed: () {
-              genderHobbyController.submitMethod();
-              genderHobbyController.clearMethod();
+              uiController.isPressed.value = true;
             },
             child: const Text('Submit'),
           ),
+          const SizedBox(
+            height: 30,
+          ),
           Obx(
-            () => genderHobbyController.isSubmit.value == true
-                ? Container(
-                    height: 100,
-                    width: 200,
-                    color: Colors.amber,
-                    child: Column(
-                      children: [
-                        Text('Gender : ${genderHobbyController.gender.value}'),
-                        Text('Hobby : ${genderHobbyController.selectedHobby}'),
-                      ],
-                    ),
-                  )
-                : const SizedBox(),
-          )
+            () => Text(
+              uiController.isPressed.value == true
+                  ? '${uiController.gender.value} \n ${uiController.checkBoxValue.string}'
+                  : 'Value Not Found',
+            ),
+          ),
         ],
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Get.to(const CounterAppUi());
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
