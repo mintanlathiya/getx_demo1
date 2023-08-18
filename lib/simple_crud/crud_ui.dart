@@ -43,7 +43,10 @@ class CrudUi extends StatelessWidget {
               height: 20,
             ),
             MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                crudController.addMethod();
+                crudController.clearmethod();
+              },
               color: Colors.blue,
               child: const Text('Submit'),
             ),
