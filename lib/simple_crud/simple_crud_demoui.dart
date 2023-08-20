@@ -217,6 +217,7 @@ class SimpleCrudeDemoUi extends StatelessWidget {
                                     MaterialButton(
                                       onPressed: () {
                                         simpleCrudContoller.updateMethod();
+                                        simpleCrudContoller.clearUpdateMethod();
                                         simpleCrudContoller
                                             .updateButton(context);
                                       },

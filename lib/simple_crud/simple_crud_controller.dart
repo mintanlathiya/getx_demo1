@@ -80,7 +80,7 @@ class SimpleCrudContoller extends GetxController {
     isFootball.value = false;
     isSinging.value = false;
     selectedAge.value = 0;
-    selectStream!.value = '';
+    //selectStream!.value = '';
   }
 
   void addUserData() {
@@ -107,9 +107,11 @@ class SimpleCrudContoller extends GetxController {
   void clearUpdateMethod() {
     txtUpdateNameEditingController.value.clear();
     txtUpdateSurNameEditingController.value.clear();
+    isCricketUpdate.value = false;
+    isFootballUpdate.value = false;
+    isSingingUpdate.value = false;
     selectedAgeUpdate.value = 0;
-    genderUpdate.value = 'gender';
-    selectedStreamUpdate!.value = '';
+    //selectedStreamUpdate!.value = '';
   }
 
   void onTapUpdate() {
@@ -134,8 +136,8 @@ class SimpleCrudContoller extends GetxController {
   }
 
   void updateMethod() {
-    userData.refresh();
     selectedHobby.clear();
+    userData.refresh();
     if (isCricketUpdate.value == true) {
       selectedHobby.add('Cricket');
     }
@@ -148,7 +150,7 @@ class SimpleCrudContoller extends GetxController {
     userData[selectedIndex.value]['name'] =
         txtUpdateNameEditingController.value.text;
     userData[selectedIndex.value]['surName'] =
-        txtUpdateNameEditingController.value.text;
+        txtUpdateSurNameEditingController.value.text;
     userData[selectedIndex.value]['age'] = selectedAgeUpdate;
     userData[selectedIndex.value]['gender'] = genderUpdate;
     userData[selectedIndex.value]['hobby'] =
