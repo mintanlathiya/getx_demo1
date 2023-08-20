@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getx_demo1/init_controller.dart';
-import 'package:getx_demo1/simple_crud/crud_ui.dart';
+import 'package:getx_demo1/simple_crud/simple_crud_demoui.dart';
 
 void main() {
   InitController.getAllController;
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CrudUi(),
+      home: SimpleCrudeDemoUi(),
     );
   }
 }

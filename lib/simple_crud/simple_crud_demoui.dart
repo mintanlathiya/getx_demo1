@@ -141,7 +141,7 @@ class SimpleCrudeDemoUi extends StatelessWidget {
                                                   .genderUpdate.value,
                                               onChanged: (value) {
                                                 simpleCrudContoller
-                                                    .genderMethod(value!);
+                                                    .genderUpdateMethod(value!);
                                               },
                                             ),
                                             const Text('FeMale'),
@@ -152,7 +152,7 @@ class SimpleCrudeDemoUi extends StatelessWidget {
                                                   .genderUpdate.value,
                                               onChanged: (value) {
                                                 simpleCrudContoller
-                                                    .genderMethod(value!);
+                                                    .genderUpdateMethod(value!);
                                               },
                                             ),
                                           ],
@@ -232,48 +232,50 @@ class SimpleCrudeDemoUi extends StatelessWidget {
                                   ]),
                             );
                           },
-                          child: Dismissible(
-                            key: UniqueKey(),
-                            onDismissed: (direction) {
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                    title: const Text('Are you sure?'),
-                                    actions: [
-                                      MaterialButton(
-                                        onPressed: () {
-                                          simpleCrudContoller.deleteButton(
-                                              context, index);
-                                        },
-                                        child: const Text('delete'),
-                                      ),
-                                      MaterialButton(
-                                        onPressed: () {
-                                          simpleCrudContoller
-                                              .cancleDeleteButton(context);
-                                        },
-                                        child: const Text('cancle'),
-                                      )
-                                    ]),
-                              );
-                            },
-                            child: Container(
-                              height: 120,
-                              width: 200,
-                              color: Colors.amber,
-                              child: Column(
-                                children: [
-                                  Text(
-                                      ' Name :${simpleCrudContoller.userData[index]['name']}'),
-                                  Text(
-                                      ' SurName :${simpleCrudContoller.userData[index]['surName']}'),
-                                  Text(
-                                      ' Gender :${simpleCrudContoller.userData[index]['gender']}'),
-                                  Text(
-                                      ' Hobby :${simpleCrudContoller.userData[index]['hobby']}'),
-                                  Text(
-                                      ' Age :${simpleCrudContoller.userData[index]['age']}'),
-                                ],
+                          child: Obx(
+                            () => Dismissible(
+                              key: UniqueKey(),
+                              onDismissed: (direction) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                      title: const Text('Are you sure?'),
+                                      actions: [
+                                        MaterialButton(
+                                          onPressed: () {
+                                            simpleCrudContoller.deleteButton(
+                                                context, index);
+                                          },
+                                          child: const Text('Delete'),
+                                        ),
+                                        MaterialButton(
+                                          onPressed: () {
+                                            simpleCrudContoller
+                                                .cancleDeleteButton(context);
+                                          },
+                                          child: const Text('Cancel'),
+                                        )
+                                      ]),
+                                );
+                              },
+                              child: Container(
+                                height: 120,
+                                width: 200,
+                                color: Colors.amber,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                        ' Name :${simpleCrudContoller.userData[index]['name']}'),
+                                    Text(
+                                        ' SurName :${simpleCrudContoller.userData[index]['surName']}'),
+                                    Text(
+                                        ' Gender :${simpleCrudContoller.userData[index]['gender']}'),
+                                    Text(
+                                        ' Hobby :${simpleCrudContoller.userData[index]['hobby']}'),
+                                    Text(
+                                        ' Age :${simpleCrudContoller.userData[index]['age']}'),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

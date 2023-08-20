@@ -32,6 +32,10 @@ class SimpleCrudContoller extends GetxController {
     gender.value = value;
   }
 
+  void genderUpdateMethod(String value) {
+    genderUpdate.value = value;
+  }
+
   void cricketMethod(bool value) {
     isCricket.value = value;
   }
@@ -130,6 +134,7 @@ class SimpleCrudContoller extends GetxController {
   }
 
   void updateMethod() {
+    userData.refresh();
     selectedHobby.clear();
     if (isCricketUpdate.value == true) {
       selectedHobby.add('Cricket');
@@ -148,7 +153,7 @@ class SimpleCrudContoller extends GetxController {
     userData[selectedIndex.value]['gender'] = genderUpdate;
     userData[selectedIndex.value]['hobby'] =
         List.from(selectedHobby.map((e) => e));
-    userData[selectedIndex.value]['stream'] = selectedStreamUpdate;
+    // userData[selectedIndex.value]['stream'] = selectedStreamUpdate;
   }
 
   void updateButton(dynamic context) {
@@ -161,10 +166,13 @@ class SimpleCrudContoller extends GetxController {
 
   void deleteButton(dynamic context, index) {
     userData.removeAt(index);
+    userData.refresh();
     Navigator.pop(context);
   }
 
   void cancleDeleteButton(dynamic context) {
+    userData.refresh();
+
     Navigator.pop(context);
   }
 }
