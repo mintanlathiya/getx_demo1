@@ -100,7 +100,7 @@ class SimpleCrudContoller extends GetxController {
       'age': selectedAge.value,
       'gender': gender.value,
       'hobby': List.from(selectedHobby.map((e) => e)),
-      'stream': selectStream,
+      //'stream': selectStream,
     });
   }
 
@@ -151,8 +151,8 @@ class SimpleCrudContoller extends GetxController {
         txtUpdateNameEditingController.value.text;
     userData[selectedIndex.value]['surName'] =
         txtUpdateSurNameEditingController.value.text;
-    userData[selectedIndex.value]['age'] = selectedAgeUpdate;
-    userData[selectedIndex.value]['gender'] = genderUpdate;
+    userData[selectedIndex.value]['age'] = selectedAgeUpdate.value;
+    userData[selectedIndex.value]['gender'] = genderUpdate.value;
     userData[selectedIndex.value]['hobby'] =
         List.from(selectedHobby.map((e) => e));
     // userData[selectedIndex.value]['stream'] = selectedStreamUpdate;
@@ -174,7 +174,6 @@ class SimpleCrudContoller extends GetxController {
 
   void cancleDeleteButton(dynamic context) {
     userData.refresh();
-
     Navigator.pop(context);
   }
 }
